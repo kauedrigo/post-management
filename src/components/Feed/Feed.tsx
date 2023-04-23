@@ -4,7 +4,7 @@ import * as S from './Feed.styles'
 
 type FeedProps = { children: ReactNode }
 
-const Feed = ({ children }: FeedProps) => {
+const FeedComponent = ({ children }: FeedProps) => {
   return (
     <S.Container>
       <S.Header>
@@ -16,4 +16,4 @@ const Feed = ({ children }: FeedProps) => {
   )
 }
 
-export { Feed }
+export { FeedComponent }

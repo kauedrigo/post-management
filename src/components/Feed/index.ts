@@ -1,1 +1,1 @@
-export { Feed } from './Feed'
+export { FeedComponent } from './Feed'
