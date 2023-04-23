@@ -19,8 +19,20 @@ const GreenVariant = css`
   border: none;
 `
 
+const DisabledStyles = css`
+  filter: grayscale(1);
+
+  :hover {
+    opacity: 1;
+  }
+
+  @media (pointer) {
+    cursor: not-allowed;
+  }
+`
+
 export const Button = styled.button<ButtonProps>`
-  ${({ variant = 'default' }) => css`
+  ${({ variant = 'default', disabled = false }) => css`
     width: 120px;
     height: 32px;
 
@@ -41,5 +53,6 @@ export const Button = styled.button<ButtonProps>`
     ${variant === 'blue' && BlueVariant}
     ${variant === 'red' && RedVariant}
     ${variant === 'green' && GreenVariant}
+    ${disabled && DisabledStyles}
   `}
 `

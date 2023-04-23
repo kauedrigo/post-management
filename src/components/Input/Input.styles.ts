@@ -7,6 +7,7 @@ export const Input = styled.input<Omit<InputProps, 'label'>>`
     height: 32px;
     padding: 8px 11px;
     margin-top: 8px;
+    box-sizing: border-box;
 
     background: #ffffff;
     border: 1px solid #777777;
@@ -15,6 +16,10 @@ export const Input = styled.input<Omit<InputProps, 'label'>>`
 
     ::placeholder {
       color: #cccccc;
+    }
+
+    :focus {
+      outline: #7695ec solid 1px;
     }
   `}
 `
