@@ -3,12 +3,17 @@ import { Button } from '../Button'
 import { Input } from '../Input'
 import { Title } from '../Title'
 import * as S from './LoginCard.styles'
+import { useAppDispatch } from '../../hooks/reduxHooks'
+import { login } from '../../redux/userSlice'
 
 const LoginCard = () => {
+  const dispatch = useAppDispatch()
+
   const [username, setUsername] = useState('')
 
   const handleLogin = (event: BaseSyntheticEvent) => {
     event.preventDefault()
+    dispatch(login(username))
     console.log('username', username)
   }
 
