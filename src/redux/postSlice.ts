@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
 
-type Post = {
+export type Post = {
   id: string
   username: string
-  created_datetime: Date
+  // created_datetime: Date
   title: string
   content: string
 }
@@ -14,7 +14,15 @@ type PostState = {
 }
 
 const initialState: PostState = {
-  posts: [],
+  posts: [
+    {
+      content: 'bnaaaa',
+      // created_datetime: undefined,
+      id: '1',
+      title: 'bananaeira',
+      username: 'robson',
+    },
+  ],
 }
 
 export const postSlice = createSlice({
