@@ -1,12 +1,7 @@
-import { Layout } from '../components/Layout/Layout'
-import { LoginCard } from '../components/LoginCard'
+import { Login } from '../pages'
 
 function App() {
-  return (
-    <Layout>
-      <LoginCard />
-    </Layout>
-  )
+  return <Login />
 }
 
 export default App
