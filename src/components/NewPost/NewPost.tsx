@@ -3,7 +3,7 @@ import { Input } from '../Input'
 import { Title } from '../Title'
 import * as S from './NewPost.styles'
 import { Button } from '../Button'
-import { Textarea } from '../Textarea/Textarea'
+import { Textarea } from '../Textarea'
 
 const NewPost = () => {
   const [title, setTitle] = useState('')
