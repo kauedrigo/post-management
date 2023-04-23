@@ -5,7 +5,7 @@ import { Title } from '../components/Title/Title'
 function App() {
   return (
     <Layout>
-      <Button variant="green">banana</Button>
+      <Button variant="red">banana</Button>
       <Title>bananeira</Title>
     </Layout>
   )

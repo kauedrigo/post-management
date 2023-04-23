@@ -28,6 +28,8 @@ export const Button = styled.button<ButtonProps>`
     border: 1px solid #999999;
     border-radius: 8px;
 
+    font-weight: 700;
+
     :hover {
       opacity: 0.7;
     }
