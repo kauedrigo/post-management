@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   ${() => css`
     width: 800px;
-    height: 100%;
+    height: max-content;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #fff;

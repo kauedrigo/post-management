@@ -4,7 +4,7 @@ import type { RootState } from './store'
 export type Post = {
   id: string
   username: string
-  // created_datetime: Date
+  created_datetime: Date
   title: string
   content: string
 }
@@ -14,21 +14,16 @@ type PostState = {
 }
 
 const initialState: PostState = {
-  posts: [
-    {
-      content: 'bnaaaa',
-      // created_datetime: undefined,
-      id: '1',
-      title: 'bananaeira',
-      username: 'robson',
-    },
-  ],
+  posts: [],
 }
 
 export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
+    populatePosts: (state, action: PayloadAction<Post[]>) => {
+      state.posts = action.payload
+    },
     createPost: (state, action: PayloadAction<Post>) => {
       state.posts.push(action.payload)
     },
@@ -45,7 +40,7 @@ export const postSlice = createSlice({
   },
 })
 
-export const { createPost, deletePost, updatePost } = postSlice.actions
+export const { populatePosts, createPost, deletePost, updatePost } = postSlice.actions
 
 export const selectPost = (state: RootState) => state.posts
 
