@@ -1,4 +1,4 @@
-import { Button } from '../components/Button/Button'
+import { Button } from '../components'
 import { Input } from '../components/Input/Input'
 import { Layout } from '../components/Layout/Layout'
 import { Title } from '../components/Title/Title'

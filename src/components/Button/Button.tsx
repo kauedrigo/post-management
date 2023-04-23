@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 import * as S from './Button.styles'
-import { Paragraph } from '../Paragraph/Paragraph'
+import { Paragraph } from '../Paragraph'
 
 type variants = 'default' | 'blue' | 'red' | 'green'
 
