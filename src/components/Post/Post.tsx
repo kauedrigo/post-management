@@ -58,7 +58,6 @@ const PostComponent = ({ post }: Props) => {
       <S.Body>
         <S.AuthorWrapper>
           <Paragraph fontWeight={700}>@{post.username}</Paragraph>
-          {/* TODO integrate post age */}
           <Paragraph>{getPostAge()}</Paragraph>
         </S.AuthorWrapper>
 

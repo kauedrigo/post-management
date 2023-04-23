@@ -5,16 +5,18 @@ import { Title } from '../Title'
 import * as S from './LoginCard.styles'
 import { useAppDispatch } from '../../hooks/reduxHooks'
 import { login } from '../../redux/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const LoginCard = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
 
   const handleLogin = (event: BaseSyntheticEvent) => {
     event.preventDefault()
     dispatch(login(username))
-    console.log('username', username)
+    navigate('/')
   }
 
   return (

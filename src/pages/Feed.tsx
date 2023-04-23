@@ -4,6 +4,7 @@ import { Layout, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { populatePosts } from '../redux/postSlice'
+import { withAuthentication } from '../hocs/withAuthentication'
 
 const Feed = () => {
   const { posts } = useAppSelector((state) => state.posts)
@@ -29,4 +30,6 @@ const Feed = () => {
   )
 }
 
-export { Feed }
+const AuthenticatedPage = withAuthentication(Feed)
+
+export { AuthenticatedPage as Feed }
