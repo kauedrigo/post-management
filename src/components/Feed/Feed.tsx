@@ -9,6 +9,8 @@ const FeedComponent = ({ children }: FeedProps) => {
     <S.Container>
       <S.Header>
         <Title color="#fff">CodeLeap Network</Title>
+
+        {/* TODO logout button */}
       </S.Header>
 
       <S.Body>{children}</S.Body>
