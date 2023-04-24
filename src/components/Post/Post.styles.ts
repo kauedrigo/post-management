@@ -26,6 +26,14 @@ export const ManagementIconsWrapper = styled.div`
   svg {
     font-size: 30px;
     color: #fff;
+
+    :hover {
+      opacity: 0.7;
+    }
+
+    @media (pointer) {
+      cursor: pointer;
+    }
   }
 `
 

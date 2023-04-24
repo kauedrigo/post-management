@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllPostsService } from '../actions/services/getAllPostsService'
-import { Layout, NewPost, PostComponent } from '../components'
+import { Layout, Modal, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { populatePosts } from '../redux/postSlice'
@@ -9,6 +9,8 @@ import { withAuthentication } from '../hocs/withAuthentication'
 const Feed = () => {
   const { posts } = useAppSelector((state) => state.posts)
   const dispatch = useAppDispatch()
+
+  const [showModal, setShowModal] = useState(true)
 
   const getPosts = async () => {
     const postsData = await getAllPostsService()
@@ -20,13 +22,17 @@ const Feed = () => {
   }, [])
 
   return (
-    <Layout>
-      <FeedComponent>
-        <NewPost />
+    <>
+      <Modal variant="edit" isOpen={showModal} closeModal={() => setShowModal(false)} />
 
-        {posts && posts.map((post) => <PostComponent post={post} />)}
-      </FeedComponent>
-    </Layout>
+      <Layout>
+        <FeedComponent>
+          <NewPost />
+
+          {posts && posts.map((post) => <PostComponent post={post} />)}
+        </FeedComponent>
+      </Layout>
+    </>
   )
 }
 

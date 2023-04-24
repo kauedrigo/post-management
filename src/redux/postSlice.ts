@@ -11,10 +11,12 @@ export type Post = {
 
 type PostState = {
   posts: Post[]
+  selectedPost: Post | null
 }
 
 const initialState: PostState = {
   posts: [],
+  selectedPost: null,
 }
 
 export const postSlice = createSlice({
@@ -37,10 +39,13 @@ export const postSlice = createSlice({
       const currentPost = state.posts[postIndex]
       state.posts[postIndex] = { ...currentPost, ...newPostInfo }
     },
+    setCurrentPost: (state, action: PayloadAction<Post | null>) => {
+      state.selectedPost = action.payload
+    },
   },
 })
 
-export const { populatePosts, createPost, deletePost, updatePost } = postSlice.actions
+export const { populatePosts, createPost, deletePost, updatePost, setCurrentPost } = postSlice.actions
 
 export const selectPost = (state: RootState) => state.posts
 
