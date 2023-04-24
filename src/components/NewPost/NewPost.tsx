@@ -4,15 +4,31 @@ import { Title } from '../Title'
 import * as S from './NewPost.styles'
 import { Button } from '../Button'
 import { Textarea } from '../Textarea'
+import { createPostService } from '../../actions/services/createPostService'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import { getAllPostsService } from '../../actions/services/getAllPostsService'
+import { populatePosts } from '../../redux/postSlice'
 
 const NewPost = () => {
+  const dispatch = useAppDispatch()
+
+  const { username } = useAppSelector((state) => state.user)
+
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
-  const handleNewPost = (event: BaseSyntheticEvent) => {
+  const handleNewPost = async (event: BaseSyntheticEvent) => {
     event.preventDefault()
     console.log('title', title)
-    // TODO call create post service and update the store
+
+    const request = {
+      username: username,
+      title: title,
+      content: content,
+    }
+    await createPostService(request)
+    const postsData = await getAllPostsService()
+    dispatch(populatePosts(postsData.results))
   }
 
   return (

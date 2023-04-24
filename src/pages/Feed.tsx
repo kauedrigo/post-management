@@ -23,6 +23,7 @@ const Feed = () => {
 
   return (
     <>
+      {/* TODO modal slice? so that NewPost can open the modal from inside */}
       <Modal variant="edit" isOpen={showModal} closeModal={() => setShowModal(false)} />
 
       <Layout>

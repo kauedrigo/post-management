@@ -48,7 +48,7 @@ const Modal = ({ variant, isOpen = false, closeModal }: Props) => {
         />
 
         <S.ButtonContainer>
-          <Button>Cancel</Button>
+          <Button onClick={closeModal}>Cancel</Button>
 
           <Button variant="green" disabled={!title || !content}>
             Save
