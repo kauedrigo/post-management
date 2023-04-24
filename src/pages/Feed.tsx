@@ -12,7 +12,7 @@ const Feed = () => {
 
   const getPosts = async () => {
     const postsData = await getAllPostsService()
-    dispatch(populatePosts(postsData.results))
+    dispatch(populatePosts(postsData))
   }
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Feed = () => {
         <FeedComponent>
           <NewPost />
 
-          {posts && posts.map((post) => <PostComponent post={post} />)}
+          {posts && posts.map((post) => <PostComponent post={post} key={post.id} />)}
         </FeedComponent>
       </Layout>
     </>

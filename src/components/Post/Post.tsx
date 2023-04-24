@@ -1,11 +1,11 @@
+import { Icon } from '@iconify/react'
 import { DateTime } from 'luxon'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import { setModal } from '../../redux/modalSlice'
 import { Post } from '../../redux/postSlice'
 import { Paragraph } from '../Paragraph'
 import { Title } from '../Title'
 import * as S from './Post.styles'
-import { Icon } from '@iconify/react'
-import { setModal } from '../../redux/modalSlice'
 
 type Props = { post: Post }
 

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { api } from '../api'
 import { Post } from '../../redux/postSlice'
 
-type GetAllPostsResponse = {
+export type GetAllPostsResponse = {
   count: number
   next: string
   previous: string

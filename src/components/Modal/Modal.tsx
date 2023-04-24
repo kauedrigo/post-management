@@ -19,7 +19,6 @@ const titles = {
 const Modal = () => {
   const dispatch = useAppDispatch()
 
-  const { selectedPost } = useAppSelector((state) => state.posts)
   const { isOpen, variant, post } = useAppSelector((state) => state.modal)
 
   const [title, setTitle] = useState('')
@@ -41,8 +40,10 @@ const Modal = () => {
     }
 
     const postsData = await getAllPostsService()
-    dispatch(populatePosts(postsData.results))
+    dispatch(populatePosts(postsData))
     dispatch(setModal({ isOpen: false, variant: 'edit', post: null }))
+    setTitle('')
+    setContent('')
   }
 
   return (
@@ -54,7 +55,6 @@ const Modal = () => {
           <>
             <Input
               label="Title"
-              defaultValue={selectedPost?.title}
               placeholder="Hello world"
               value={title}
               onChange={(event: BaseSyntheticEvent) => setTitle(event.target.value)}
@@ -62,7 +62,6 @@ const Modal = () => {
 
             <Textarea
               label="Content"
-              defaultValue={selectedPost?.content}
               placeholder="Content here"
               value={content}
               onChange={(event: BaseSyntheticEvent) => setContent(event.target.value)}

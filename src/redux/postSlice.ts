@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
+import { GetAllPostsResponse } from '../actions/services/getAllPostsService'
 
 export type Post = {
   id: string
@@ -11,20 +12,25 @@ export type Post = {
 
 type PostState = {
   posts: Post[]
-  selectedPost: Post | null
+  next: string | null
 }
 
 const initialState: PostState = {
   posts: [],
-  selectedPost: null,
+  next: null,
 }
 
 export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    populatePosts: (state, action: PayloadAction<Post[]>) => {
-      state.posts = action.payload
+    populatePosts: (state, action: PayloadAction<GetAllPostsResponse>) => {
+      if (action.payload.previous === null) {
+        state.posts = action.payload.results
+      } else {
+        state.posts.push(...action.payload.results)
+      }
+      state.next = action.payload.next
     },
     createPost: (state, action: PayloadAction<Post>) => {
       state.posts.push(action.payload)

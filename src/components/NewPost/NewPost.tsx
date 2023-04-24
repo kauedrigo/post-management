@@ -27,7 +27,7 @@ const NewPost = () => {
     }
     await createPostService(request)
     const postsData = await getAllPostsService()
-    dispatch(populatePosts(postsData.results))
+    dispatch(populatePosts(postsData))
   }
 
   return (
