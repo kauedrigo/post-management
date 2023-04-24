@@ -1,14 +1,17 @@
 import { DateTime } from 'luxon'
-import { useAppSelector } from '../../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { Post } from '../../redux/postSlice'
 import { Paragraph } from '../Paragraph'
 import { Title } from '../Title'
 import * as S from './Post.styles'
 import { Icon } from '@iconify/react'
+import { setModal } from '../../redux/modalSlice'
 
 type Props = { post: Post }
 
 const PostComponent = ({ post }: Props) => {
+  const dispatch = useAppDispatch()
+
   const { username } = useAppSelector((state) => state.user)
 
   const getPostAge = () => {
@@ -42,6 +45,14 @@ const PostComponent = ({ post }: Props) => {
     return postAgeString
   }
 
+  const handleDeletePost = () => {
+    dispatch(setModal({ isOpen: true, variant: 'delete', post: post }))
+  }
+
+  const handleEditPost = () => {
+    dispatch(setModal({ isOpen: true, variant: 'edit', post: post }))
+  }
+
   return (
     <S.Container>
       <S.Header>
@@ -49,8 +60,9 @@ const PostComponent = ({ post }: Props) => {
 
         {username === post.username && (
           <S.ManagementIconsWrapper>
-            <Icon icon="ic:baseline-delete-forever" />
-            <Icon icon="bx:bx-edit" />
+            <Icon icon="ic:baseline-delete-forever" onClick={handleDeletePost} />
+
+            <Icon icon="bx:bx-edit" onClick={handleEditPost} />
           </S.ManagementIconsWrapper>
         )}
       </S.Header>

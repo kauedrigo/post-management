@@ -1,57 +1,84 @@
 import { BaseSyntheticEvent, useState } from 'react'
-import { useAppSelector } from '../../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import { setModal } from '../../redux/modalSlice'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { Textarea } from '../Textarea'
 import { Title } from '../Title'
 import * as S from './Modal.styles'
+import { deletePostService } from '../../actions/services/deletePostService'
+import { getAllPostsService } from '../../actions/services/getAllPostsService'
+import { populatePosts } from '../../redux/postSlice'
+import { editPostService } from '../../actions/services/editPostService'
 
 const titles = {
   edit: 'Edit item',
   delete: 'Are you sure you want to delete this item?',
 }
 
-type variants = 'edit' | 'delete'
+const Modal = () => {
+  const dispatch = useAppDispatch()
 
-type Props = { variant: variants; isOpen: boolean; closeModal: () => void }
-
-const Modal = ({ variant, isOpen = false, closeModal }: Props) => {
   const { selectedPost } = useAppSelector((state) => state.posts)
+  const { isOpen, variant, post } = useAppSelector((state) => state.modal)
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
   const handleCloseModal = (event: BaseSyntheticEvent) => {
     event.stopPropagation()
-    closeModal()
+    dispatch(setModal({ isOpen: false, variant: 'edit', post: null }))
+  }
+
+  const handleModalSubmit = async () => {
+    if (variant === 'delete') {
+      await deletePostService(post?.id as string)
+    }
+
+    if (variant === 'edit') {
+      const request = { title: title, content: content }
+      await editPostService(post?.id as string, request)
+    }
+
+    const postsData = await getAllPostsService()
+    dispatch(populatePosts(postsData.results))
+    dispatch(setModal({ isOpen: false, variant: 'edit', post: null }))
   }
 
   return (
     <S.Container isOpen={isOpen} onClick={handleCloseModal}>
       <S.Card onClick={(event: BaseSyntheticEvent) => event.stopPropagation()}>
-        <Title>{titles[variant]}</Title>
+        <Title style={{ marginBottom: variant === 'delete' ? 24 : 0 }}>{titles[variant]}</Title>
 
-        <Input
-          label="Title"
-          defaultValue={selectedPost?.title}
-          placeholder="Hello world"
-          value={title}
-          onChange={(event: BaseSyntheticEvent) => setTitle(event.target.value)}
-        />
+        {variant === 'edit' && (
+          <>
+            <Input
+              label="Title"
+              defaultValue={selectedPost?.title}
+              placeholder="Hello world"
+              value={title}
+              onChange={(event: BaseSyntheticEvent) => setTitle(event.target.value)}
+            />
 
-        <Textarea
-          label="Content"
-          defaultValue={selectedPost?.content}
-          placeholder="Content here"
-          value={content}
-          onChange={(event: BaseSyntheticEvent) => setContent(event.target.value)}
-        />
+            <Textarea
+              label="Content"
+              defaultValue={selectedPost?.content}
+              placeholder="Content here"
+              value={content}
+              onChange={(event: BaseSyntheticEvent) => setContent(event.target.value)}
+            />
+          </>
+        )}
 
         <S.ButtonContainer>
-          <Button onClick={closeModal}>Cancel</Button>
+          <Button onClick={handleCloseModal}>Cancel</Button>
 
-          <Button variant="green" disabled={!title || !content}>
-            Save
+          <Button
+            variant={variant === 'delete' ? 'red' : 'green'}
+            onClick={handleModalSubmit}
+            disabled={(!title || !content) && variant === 'edit'}
+          >
+            {variant === 'delete' ? 'Delete' : 'Save'}
           </Button>
         </S.ButtonContainer>
       </S.Card>

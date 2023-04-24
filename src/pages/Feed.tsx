@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getAllPostsService } from '../actions/services/getAllPostsService'
 import { Layout, Modal, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
+import { withAuthentication } from '../hocs/withAuthentication'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { populatePosts } from '../redux/postSlice'
-import { withAuthentication } from '../hocs/withAuthentication'
 
 const Feed = () => {
   const { posts } = useAppSelector((state) => state.posts)
   const dispatch = useAppDispatch()
-
-  const [showModal, setShowModal] = useState(true)
 
   const getPosts = async () => {
     const postsData = await getAllPostsService()
@@ -23,8 +21,7 @@ const Feed = () => {
 
   return (
     <>
-      {/* TODO modal slice? so that NewPost can open the modal from inside */}
-      <Modal variant="edit" isOpen={showModal} closeModal={() => setShowModal(false)} />
+      <Modal />
 
       <Layout>
         <FeedComponent>

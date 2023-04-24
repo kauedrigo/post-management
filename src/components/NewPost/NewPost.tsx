@@ -19,7 +19,6 @@ const NewPost = () => {
 
   const handleNewPost = async (event: BaseSyntheticEvent) => {
     event.preventDefault()
-    console.log('title', title)
 
     const request = {
       username: username,
