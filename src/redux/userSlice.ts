@@ -20,7 +20,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.username = ''
       localStorage.removeItem('username')
-      window.location.href = '/'
+      window.location.reload()
     },
   },
 })
