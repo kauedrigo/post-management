@@ -12,12 +12,12 @@ export type Post = {
 
 type PostState = {
   posts: Post[]
-  next: string | null
+  next: string
 }
 
 const initialState: PostState = {
   posts: [],
-  next: null,
+  next: '',
 }
 
 export const postSlice = createSlice({

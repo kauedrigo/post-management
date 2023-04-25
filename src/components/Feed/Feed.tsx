@@ -1,12 +1,12 @@
-import { ReactNode } from 'react'
+import { MutableRefObject, ReactNode } from 'react'
 import { Title } from '../Title'
 import * as S from './Feed.styles'
 
-type FeedProps = { children: ReactNode }
+type FeedProps = { children: ReactNode; innerRef?: MutableRefObject<HTMLDivElement> }
 
-const FeedComponent = ({ children }: FeedProps) => {
+const FeedComponent = ({ children, innerRef }: FeedProps) => {
   return (
-    <S.Container>
+    <S.Container ref={innerRef}>
       <S.Header>
         <Title color="#fff">CodeLeap Network</Title>
 

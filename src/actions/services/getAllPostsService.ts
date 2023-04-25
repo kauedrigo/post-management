@@ -9,8 +9,8 @@ export type GetAllPostsResponse = {
   results: Post[]
 }
 
-export const getAllPostsService = async () => {
-  const { data }: AxiosResponse<GetAllPostsResponse> = await api.get(``)
+export const getAllPostsService = async (filter?: string) => {
+  const { data }: AxiosResponse<GetAllPostsResponse> = await (filter ? api.get(`/${filter}`) : api.get(``))
 
   return data
 }
