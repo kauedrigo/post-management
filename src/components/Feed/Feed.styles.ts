@@ -24,6 +24,21 @@ export const Header = styled.div`
   background-color: #7695ec;
 `
 
+export const Logout = styled.div`
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 8px;
+
+  :hover {
+    opacity: 0.8;
+  }
+
+  @media (pointer) {
+    cursor: pointer;
+  }
+`
+
 export const Body = styled.div`
   ${() => css`
     width: 100%;
