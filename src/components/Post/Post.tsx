@@ -27,6 +27,7 @@ const PostComponent = ({ post }: Props) => {
     const diffHours = diff.as('hours') * -1
     const diffDays = diff.as('days') * -1
     const diffMonths = diff.as('months') * -1
+    const diffYears = diff.as('years') * -1
 
     if (diffMinutes < MINUTES_IN_AN_HOUR) {
       const suffix = diffMinutes < 2 ? ' minute ago' : ' minutes ago'
@@ -36,10 +37,13 @@ const PostComponent = ({ post }: Props) => {
       postAgeString = Math.floor(diffHours) + suffix
     } else if (diffDays < DAYS_IN_A_MONTH) {
       const suffix = diffDays < 2 ? ' day ago' : ' days ago'
-      postAgeString = Math.floor(diffHours) + suffix
+      postAgeString = Math.floor(diffDays) + suffix
     } else if (diffMonths < MONTHS_IN_A_YEAR) {
       const suffix = diffMonths < 2 ? ' month ago' : ' months ago'
       postAgeString = Math.floor(diffMonths) + suffix
+    } else {
+      const suffix = diffYears < 2 ? ' year ago' : ' years ago'
+      postAgeString = Math.floor(diffYears) + suffix
     }
 
     return postAgeString
