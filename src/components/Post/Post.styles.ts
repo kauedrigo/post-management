@@ -46,7 +46,6 @@ export const ManagementIconsWrapper = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    padding: 24px;
     gap: 24px;
   }
 `

@@ -15,16 +15,23 @@ export const Container = styled.div<{ isOpen: boolean }>`
 `
 
 export const Card = styled.div`
-  width: 660px;
+  width: 100%;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
 
-  padding: 24px;
-  gap: 24px;
+  padding: 16px;
+  gap: 16px;
+  margin: 12px;
 
   background-color: #ffffff;
   border: 1px solid #999999;
   border-radius: 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 24px;
+    gap: 24px;
+  }
 `
 
 export const ButtonContainer = styled.div`
