@@ -60,7 +60,7 @@ const PostComponent = ({ post }: Props) => {
   return (
     <S.Container>
       <S.Header>
-        <Title>{post.title}</Title>
+        <Title style={{ overflow: 'hidden' }}>{post.title}</Title>
 
         {username === post.username && (
           <S.ManagementIconsWrapper>
