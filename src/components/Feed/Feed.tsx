@@ -1,18 +1,18 @@
-import { MutableRefObject, ReactNode } from 'react'
-import { Title } from '../Title'
-import * as S from './Feed.styles'
-import { Paragraph } from '../Paragraph'
 import { Icon } from '@iconify/react'
+import { ReactNode } from 'react'
 import { useAppDispatch } from '../../hooks/reduxHooks'
 import { logout } from '../../redux/userSlice'
+import { Paragraph } from '../Paragraph'
+import { Title } from '../Title'
+import * as S from './Feed.styles'
 
-type FeedProps = { children: ReactNode; innerRef?: MutableRefObject<HTMLDivElement> }
+type FeedProps = { children: ReactNode }
 
-const FeedComponent = ({ children, innerRef }: FeedProps) => {
+const FeedComponent = ({ children }: FeedProps) => {
   const dispatch = useAppDispatch()
 
   return (
-    <S.Container ref={innerRef}>
+    <S.Container>
       <S.Header>
         <Title color="#fff">CodeLeap Network</Title>
 

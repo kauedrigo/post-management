@@ -28,7 +28,10 @@ export const postSlice = createSlice({
       if (action.payload.previous === null) {
         state.posts = action.payload.results
       } else {
-        state.posts.push(...action.payload.results)
+        const uniquePosts = action.payload.results.filter(
+          (post) => !state.posts.find((elem) => elem.id === post.id)
+        )
+        state.posts.push(...uniquePosts)
       }
       state.next = action.payload.next
     },

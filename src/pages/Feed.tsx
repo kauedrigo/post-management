@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { getAllPostsService } from '../actions/services/getAllPostsService'
 import { Layout, Modal, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
@@ -8,8 +8,6 @@ import { populatePosts } from '../redux/postSlice'
 
 const Feed = () => {
   const dispatch = useAppDispatch()
-
-  const ref = useRef() as MutableRefObject<HTMLDivElement>
 
   const { posts, next } = useAppSelector((state) => state.posts)
 
@@ -32,7 +30,8 @@ const Feed = () => {
     const scrollTop = document.documentElement.scrollTop
     const scrollHeight = document.documentElement.scrollHeight
     const clientHeight = document.documentElement.clientHeight
-    if (scrollTop + clientHeight >= scrollHeight) {
+
+    if (Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
       getNextPosts()
     }
   }
@@ -46,7 +45,7 @@ const Feed = () => {
       <Modal />
 
       <Layout>
-        <FeedComponent innerRef={ref}>
+        <FeedComponent>
           <NewPost />
 
           {posts && posts.map((post) => <PostComponent post={post} key={post.id} />)}
