@@ -24,9 +24,15 @@ const Modal = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
+  const resetModal = () => {
+    setTitle('')
+    setContent('')
+  }
+
   const handleCloseModal = (event: BaseSyntheticEvent) => {
     event.stopPropagation()
     dispatch(setModal({ isOpen: false, variant: 'edit', post: null }))
+    resetModal()
   }
 
   const handleModalSubmit = async () => {
@@ -42,8 +48,7 @@ const Modal = () => {
     const postsData = await getAllPostsService()
     dispatch(populatePosts(postsData))
     dispatch(setModal({ isOpen: false, variant: 'edit', post: null }))
-    setTitle('')
-    setContent('')
+    resetModal()
   }
 
   return (
