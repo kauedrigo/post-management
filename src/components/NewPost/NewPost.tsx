@@ -28,6 +28,8 @@ const NewPost = () => {
     await createPostService(request)
     const postsData = await getAllPostsService()
     dispatch(populatePosts(postsData))
+    setTitle('')
+    setContent('')
   }
 
   return (
