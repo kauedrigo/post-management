@@ -1,5 +1,7 @@
+import { useLottie } from 'lottie-react'
 import { useEffect, useState } from 'react'
 import { getAllPostsService } from '../actions/services/getAllPostsService'
+import loadingJSON from '../assets/loading.json'
 import { Layout, Modal, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
 import { withAuthentication } from '../hocs/withAuthentication'
@@ -11,11 +13,14 @@ const Feed = () => {
 
   const { posts, next } = useAppSelector((state) => state.posts)
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const { View } = useLottie({ animationData: loadingJSON, loop: true }, { width: '100%', height: 50 })
 
   const getPosts = async () => {
     const postsData = await getAllPostsService()
     dispatch(populatePosts(postsData))
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -39,6 +44,7 @@ const Feed = () => {
       getNextPosts()
     }
   }
+
   useEffect(() => {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
@@ -54,7 +60,7 @@ const Feed = () => {
 
           {posts && posts.map((post) => <PostComponent post={post} key={post.id} />)}
 
-          {/* {isLoading && <div>LOADING...</div>} */}
+          {isLoading && View}
         </FeedComponent>
       </Layout>
     </>
