@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllPostsService } from '../actions/services/getAllPostsService'
 import { Layout, Modal, NewPost, PostComponent } from '../components'
 import { FeedComponent } from '../components/Feed/Feed'
@@ -11,6 +11,8 @@ const Feed = () => {
 
   const { posts, next } = useAppSelector((state) => state.posts)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const getPosts = async () => {
     const postsData = await getAllPostsService()
     dispatch(populatePosts(postsData))
@@ -21,9 +23,11 @@ const Feed = () => {
   }, [])
 
   const getNextPosts = async () => {
+    setIsLoading(true)
     const nextFilter = next?.split('/').slice(-1)[0]
     const postsData = await getAllPostsService(nextFilter)
     dispatch(populatePosts(postsData))
+    setIsLoading(false)
   }
 
   const onScroll = () => {
@@ -31,14 +35,14 @@ const Feed = () => {
     const scrollHeight = document.documentElement.scrollHeight
     const clientHeight = document.documentElement.clientHeight
 
-    if (Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
+    if (next && !isLoading && Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
       getNextPosts()
     }
   }
   useEffect(() => {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
-  }, [next])
+  }, [next, isLoading])
 
   return (
     <>
@@ -49,6 +53,8 @@ const Feed = () => {
           <NewPost />
 
           {posts && posts.map((post) => <PostComponent post={post} key={post.id} />)}
+
+          {/* {isLoading && <div>LOADING...</div>} */}
         </FeedComponent>
       </Layout>
     </>
