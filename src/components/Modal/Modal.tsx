@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from 'react'
+import { BaseSyntheticEvent, useEffect, useState } from 'react'
 import { deletePostService } from '../../actions/services/deletePostService'
 import { editPostService } from '../../actions/services/editPostService'
 import { getAllPostsService } from '../../actions/services/getAllPostsService'
@@ -23,6 +23,11 @@ const Modal = () => {
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+
+  useEffect(() => {
+    post?.title && setTitle(post?.title)
+    post?.content && setContent(post?.content)
+  }, [post])
 
   const resetModal = () => {
     setTitle('')
