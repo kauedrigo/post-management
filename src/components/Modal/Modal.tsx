@@ -1,15 +1,15 @@
 import { BaseSyntheticEvent, useState } from 'react'
+import { deletePostService } from '../../actions/services/deletePostService'
+import { editPostService } from '../../actions/services/editPostService'
+import { getAllPostsService } from '../../actions/services/getAllPostsService'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { setModal } from '../../redux/modalSlice'
+import { populatePosts } from '../../redux/postSlice'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { Textarea } from '../Textarea'
 import { Title } from '../Title'
 import * as S from './Modal.styles'
-import { deletePostService } from '../../actions/services/deletePostService'
-import { getAllPostsService } from '../../actions/services/getAllPostsService'
-import { populatePosts } from '../../redux/postSlice'
-import { editPostService } from '../../actions/services/editPostService'
 
 const titles = {
   edit: 'Edit item',
@@ -61,14 +61,14 @@ const Modal = () => {
             <Input
               label="Title"
               placeholder="Hello world"
-              value={title}
+              defaultValue={post?.title}
               onChange={(event: BaseSyntheticEvent) => setTitle(event.target.value)}
             />
 
             <Textarea
               label="Content"
               placeholder="Content here"
-              value={content}
+              defaultValue={post?.content}
               onChange={(event: BaseSyntheticEvent) => setContent(event.target.value)}
             />
           </>
